@@ -6,7 +6,8 @@
     "LABELS": {
         "TITLE": "Title",
         "TAGS": "Tags",
-        "DESCRIPTION": "Description"
+        "DESCRIPTION": "Description",
+        "NOTES": "Notes"
     },
     "MODALS": {
         "ADD_NOTE_MODAL_TITLE": "Add Note"

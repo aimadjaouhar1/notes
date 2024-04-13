@@ -1,8 +1,14 @@
 <app-search-notes />
 
-<button class="btn btn-primary mt-4" (click)="onClickAdd(addNoteModal)">add</button>
+<div class="container">
+    <div class="d-flex flex-row justify-content-between align-items-center mt-4 mb-4">
+        <h3>{{ 'LABELS.NOTES' | translate }}</h3> 
+        <button class="btn btn-primary fs-3 py-0" (click)="onClickAdd(addNoteModal)">+</button>
+    </div>
 
-<app-list-notes [notes]="(notes$ | async) ?? []" />
+    <app-list-notes [notes]="(notes$ | async) ?? []" />
+</div>
+
 
 <ng-template #addNoteModal let-modal>
     <div class="modal-header">
