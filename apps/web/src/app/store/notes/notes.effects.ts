@@ -1,18 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import * as NotesActions from './notes.actions';
-import { of } from 'rxjs';
-import { INote } from '@notes/shared-lib/interfaces/note.interface';
 import { NoteHttp } from '../../_core/http/note.http';
+import { of } from 'rxjs';
 
 @Injectable()
 export class NoteEffects {
 
-constructor(
-    private readonly actions$: Actions, 
-    private readonly noteHttp: NoteHttp
-) {}
+  private readonly actions$ = inject(Actions);
+  private readonly noteHttp =  inject(NoteHttp);
 
   addNote$ = createEffect(() =>
     this.actions$.pipe(
