@@ -2,6 +2,8 @@
 
 <button class="btn btn-primary mt-4" (click)="onClickAdd(addNoteModal)">add</button>
 
+<app-list-notes [notes]="(notes$ | async) ?? []" />
+
 <ng-template #addNoteModal let-modal>
     <div class="modal-header">
 		<h4 class="modal-title" id="modal-basic-title">{{ 'MODALS.ADD_NOTE_MODAL_TITLE' | translate }}</h4>
