@@ -10,6 +10,7 @@ const entities = [
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([...entities]),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
