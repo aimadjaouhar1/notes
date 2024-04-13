@@ -7,7 +7,8 @@ import { NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstra
 import { INote } from '@notes/shared-lib/interfaces/note.interface';
 import { TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
-import { NotesState, selectGetNotes, addNote } from '@notes/web/app/store/notes';
+import { NotesState, selectGetNotes, getNotes } from '@notes/web/app/store/notes';
+import * as NotesActions from '@notes/web/app/store/notes/notes.actions';
 
 
 @Component({
@@ -34,13 +35,16 @@ export class NotesComponent {
 
   notes$ = this.store.select(selectGetNotes);
 
+  constructor() {
+    this.store.dispatch(NotesActions.getNotes());
+  }
 
   onClickAdd(template: TemplateRef<ElementRef>) {
     this.addNoteModalRef = this.modalService.open(template, { centered: true });
   }
 
   handleAddNote(note: Omit<INote, "id" | "status">) {
-    this.store.dispatch(addNote({ note }));
+    this.store.dispatch(NotesActions.addNote({ note }));
   }
 
 }
