@@ -6,6 +6,7 @@ import { NotesState, NotesStateStatus } from "./notes.state";
   
 export const initialState: NotesState = {
     status: NotesStateStatus.INITIAL,
+    errorMessage: null,
     notes: []
 };
   
@@ -29,5 +30,23 @@ export const notesReducer = createReducer(
           ...state,
           notes: state.notes.filter(existingNote => existingNote.id !== -1)
         };
-    })
+    }),
+
+    on(NotesActions.getNotes, (state, { }) => ({
+      ...state,
+      status: NotesStateStatus.LOADING,
+    })),
+
+    on(NotesActions.getNotesSuccess, (state, { notes }) => ({
+      ...state,
+      notes: [...notes],
+      errorMessage: null,
+      status: NotesStateStatus.SUCCESS,
+    })),
+
+    on(NotesActions.getNoteFailure, (state, { errorMessage }) => ({
+      ...state,
+      errorMessage: errorMessage,
+      status: NotesStateStatus.ERROR,
+    })),
 );
