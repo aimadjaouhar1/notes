@@ -1,1 +1,6 @@
-<p>search-notes works!</p>
+  <nav class="navbar bg-primary">
+    <form class="d-flex m-2 mx-4 w-100" role="search"  (ngSubmit)="onSubmit()">
+        <input class="form-control me-2" type="search" placeholder="" aria-label="Search" [(ngModel)]="searchQuery" name="searchQuery">
+        <button class="btn btn-outline-light" type="submit">{{ 'BUTTONS.SEARCH' | translate }}</button>
+    </form>
+  </nav>
