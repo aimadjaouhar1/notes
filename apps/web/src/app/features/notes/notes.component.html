@@ -1,2 +1,14 @@
 <app-search-notes />
-<app-add-note [tags]="['A', 'B', 'C', 'D']" />
+
+<button class="btn btn-primary mt-4" (click)="onClickAdd(addNoteModal)">add</button>
+
+<ng-template #addNoteModal let-modal>
+    <div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{ 'MODALS.ADD_NOTE_MODAL_TITLE' | translate }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+	</div>
+
+    <div class="modal-body">
+        <app-add-note [tags]="tags" (add)="handleAddNote($event)"/>
+    </div>
+</ng-template>
