@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
 import * as NotesActions from './notes.actions';
 import { of } from 'rxjs';
 import { INote } from '@notes/shared-lib/interfaces/note.interface';
@@ -17,12 +17,22 @@ constructor(
   addNote$ = createEffect(() =>
     this.actions$.pipe(
       ofType(NotesActions.addNote),
-      mergeMap(({ note }) =>
+      switchMap(({ note }) =>
         this.noteHttp.addNote(note).pipe(
           map(createdNote => NotesActions.addNoteSuccess({ note: createdNote })),
           catchError(() => of(NotesActions.addNoteFailure()))
         )
       )
+    )
+  );
+
+  getNotes$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(NotesActions.getNotes),
+      switchMap(() => this.noteHttp.getNotes().pipe(
+        map((notes) => NotesActions.getNotesSuccess({ notes })),
+        catchError((error) => of(NotesActions.getNoteFailure({ errorMessage: error })))
+      )) 
     )
   );
 
