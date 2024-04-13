@@ -2,8 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { NoteController } from './controllers/note.controller';
 import { NoteService } from './services/note.service';
+import { Note } from './entities/note.entity';
 
-const entities = [];
+const entities = [
+  Note
+];
 
 @Module({
   imports: [
