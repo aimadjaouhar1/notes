@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@notes/api/*": ["apps/api/src/*"],
-      "@notes/shared-lib/*": ["shared-lib/src/"],
+      "@notes/shared-lib/*": ["shared-lib/src/*"],
       "@notes/web/*": ["apps/web/src/*"]
     }
   },
