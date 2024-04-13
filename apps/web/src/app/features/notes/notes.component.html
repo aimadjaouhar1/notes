@@ -6,7 +6,29 @@
         <button class="btn btn-primary fs-3 py-0" (click)="onClickAdd(addNoteModal)">+</button>
     </div>
 
-    <app-list-notes [notes]="(notes$ | async) ?? []" (delete)="openDeleteConfirmation(deleteNoteModal, $event)" />
+    <ng-container [ngSwitch]="(status$ | async)">
+        <div *ngSwitchCase="NotesStateStatus.SUCCESS">
+            <app-list-notes [notes]="(notes$ | async) ?? []" (delete)="openDeleteConfirmation(deleteNoteModal, $event)" />
+        </div>
+
+        <div *ngSwitchCase="NotesStateStatus.LOADING">
+            <div class="loading-container d-flex flex-column justify-content-center align-items-center">
+                <div class="text-center">
+                    <div class="spinner-border text-primary m-auto" role="status"></div>
+                    <h5 class="mt-4">{{ 'LABELS.LOADING' | translate }}...</h5>
+                </div>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="NotesStateStatus.ERROR">
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill fs-3 me-2"></i>
+                <div>
+                    {{ errorMessage$ | async }}
+                </div>
+            </div>
+        </div>
+    </ng-container> 
 </div>
 
 

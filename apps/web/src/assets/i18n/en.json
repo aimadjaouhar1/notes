@@ -9,11 +9,15 @@
         "TITLE": "Title",
         "TAGS": "Tags",
         "DESCRIPTION": "Description",
-        "NOTES": "Notes"
+        "NOTES": "Notes",
+        "LOADING": "Loading"
     },
     "MODALS": {
         "ADD_NOTE_MODAL_TITLE": "Add Note",
         "DELETE_NOTE_MODAL_TITLE": "Delete Note",
         "DELETE_NOTE_MODAL_P1": "Are you sure you want to delete" 
+    },
+    "ERRORS": {
+        "TITLE_REQUIRED": "title is required!"
     }
 }
