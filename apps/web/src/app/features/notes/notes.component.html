@@ -6,7 +6,7 @@
         <button class="btn btn-primary fs-3 py-0" (click)="onClickAdd(addNoteModal)">+</button>
     </div>
 
-    <app-list-notes [notes]="(notes$ | async) ?? []" />
+    <app-list-notes [notes]="(notes$ | async) ?? []" (delete)="openDeleteConfirmation(deleteNoteModal, $event)" />
 </div>
 
 
@@ -19,4 +19,8 @@
     <div class="modal-body">
         <app-add-note [tags]="tags" (add)="handleAddNote($event)"/>
     </div>
+</ng-template>
+
+<ng-template #deleteNoteModal let-modal>
+    <app-delete-note [modalRef]="modal" [note]="selectedNote" (confirm)="handleDeleteNote($event)"  />
 </ng-template>

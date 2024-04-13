@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { NotesState, selectGetNotes, getNotes } from '@notes/web/app/store/notes';
 import * as NotesActions from '@notes/web/app/store/notes/notes.actions';
+import { DeleteNoteComponent } from './delete-note/delete-note.component';
 
 
 @Component({
@@ -20,7 +21,8 @@ import * as NotesActions from '@notes/web/app/store/notes/notes.actions';
     NgbModalModule,
     SearchNotesComponent, 
     AddNoteComponent, 
-    ListNotesComponent
+    ListNotesComponent,
+    DeleteNoteComponent
   ],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
@@ -29,9 +31,8 @@ export class NotesComponent {
   private readonly modalService = inject(NgbModal);
   private readonly store = inject(Store<NotesState>);
 
-  addNoteModalRef?: NgbModalRef;
-
   tags = [];
+  selectedNote!: INote;
 
   notes$ = this.store.select(selectGetNotes);
 
@@ -40,11 +41,16 @@ export class NotesComponent {
   }
 
   onClickAdd(template: TemplateRef<ElementRef>) {
-    this.addNoteModalRef = this.modalService.open(template, { centered: true });
+    this.modalService.open(template, { centered: true });
   }
 
-  handleAddNote(note: Omit<INote, "id" | "status">) {
-    this.store.dispatch(NotesActions.addNote({ note }));
+  openDeleteConfirmation(template: TemplateRef<ElementRef>, note: INote) {
+    this.selectedNote = note;
+    this.modalService.open(template, { centered: true });
   }
+
+  handleAddNote = (note: Omit<INote, "id" | "status">) => this.store.dispatch(NotesActions.addNote({ note }));
+
+  handleDeleteNote = (note: INote) => this.store.dispatch(NotesActions.deleteNote({ note })) 
 
 }

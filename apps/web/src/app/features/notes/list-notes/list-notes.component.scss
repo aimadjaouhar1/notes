@@ -1,4 +1,11 @@
 .card {
+    position: relative;
     width: 100%;
     height: 250px;
+}
+
+.btn-delete {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
 }
