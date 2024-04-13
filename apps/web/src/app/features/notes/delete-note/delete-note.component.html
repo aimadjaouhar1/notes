@@ -1,1 +1,15 @@
-<p>delete-note works!</p>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">{{ 'MODALS.DELETE_NOTE_MODAL_TITLE' | translate }}</h4>
+    <button type="button" class="btn-close" (click)="modalRef.close()"
+    ></button>
+</div>
+
+<div class="modal-body">
+    <p>
+        <strong>{{ 'MODALS.DELETE_NOTE_MODAL_P1' | translate }} <span class="text-primary">{{ note.title }}</span> </strong>
+    </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modalRef.close()">{{ 'BUTTONS.CANCEL' | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="confirm.emit(note)">{{ 'BUTTONS.CONFIRM' | translate }}</button>
+</div>
