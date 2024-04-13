@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import * as NotesActions from './notes.actions';
 import { NoteHttp } from '../../_core/http/note.http';
-import { from, of } from 'rxjs';
+import { of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
@@ -43,7 +43,7 @@ export class NoteEffects {
       ofType(NotesActions.getNotes),
       switchMap(() => this.noteHttp.getNotes().pipe(
         map((notes) => NotesActions.getNotesSuccess({ notes })),
-        catchError((error) => of(NotesActions.getNoteFailure({ errorMessage: error })))
+        catchError((error) => of(NotesActions.getNotesFailure({ errorMessage: error })))
       )) 
     )
   );

@@ -25,7 +25,7 @@ export const notesReducer = createReducer(
       status: NotesStateStatus.SUCCESS,
     })),
 
-    on(NotesActions.getNoteFailure, (state, { errorMessage }) => ({
+    on(NotesActions.getNotesFailure, (state, { errorMessage }) => ({
       ...state,
       errorMessage: errorMessage,
       status: NotesStateStatus.ERROR,

@@ -7,7 +7,7 @@ export const addNoteFailure = createAction('[Note] Add Note Failure');
 
 export const getNotes = createAction('[Note] Get Notes');
 export const getNotesSuccess = createAction('[Note] Get Notes Success', props<{ notes: INote[] }>());
-export const getNoteFailure = createAction('[Note] Get Notes Failure', props<{ errorMessage: string }>());
+export const getNotesFailure = createAction('[Note] Get Notes Failure', props<{ errorMessage: string }>());
 
 export const deleteNote = createAction('[Note] Delete Note', props<{ note: INote }>());
 export const deleteNoteSuccess = createAction('[Note] Delete Note Success');
