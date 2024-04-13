@@ -8,3 +8,13 @@ export const selectGetNotes = createSelector(
     selectNotes,
     (state: NotesState) => state.notes
 )
+
+export const statusSelector = createSelector(
+    selectNotes,
+    (state: NotesState) => state.status
+)
+
+export const errorMessageSelector = createSelector(
+    selectNotes,
+    (state: NotesState) => state.errorMessage
+)
