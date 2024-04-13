@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@notes/shared-lib/*": ["shared-lib/src/"],
       "@notes/api/*": ["apps/api/src/*"],
-      "@notes/web/*": ["apps/web/src/*"],
+      "@notes/shared-lib/*": ["shared-lib/src/"],
+      "@notes/web/*": ["apps/web/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

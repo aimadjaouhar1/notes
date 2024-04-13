@@ -1,12 +1,24 @@
-import { APP_INITIALIZER, ApplicationConfig, Injector, importProvidersFrom } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  ApplicationConfig,
+  Injector,
+  importProvidersFrom,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { provideTranslation, translateAppInitializerFactory } from './_core/config/translation.config';
+import {
+  provideTranslation,
+  translateAppInitializerFactory,
+} from './_core/config/translation.config';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideEffects(),
+    provideStore(),
     provideRouter(appRoutes),
     provideHttpClient(withFetch()),
     importProvidersFrom(TranslateModule.forRoot(provideTranslation())),
@@ -14,7 +26,7 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: translateAppInitializerFactory,
       deps: [TranslateService, Injector],
-      multi: true
-    }
+      multi: true,
+    },
   ],
 };
