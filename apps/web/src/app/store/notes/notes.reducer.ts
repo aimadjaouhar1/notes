@@ -2,12 +2,10 @@ import { createReducer, on } from "@ngrx/store";
 import { INote } from "@notes/shared-lib/interfaces/note.interface";
 import * as NotesActions from './notes.actions';
 import { NoteStatus } from "@notes/shared-lib/enums";
-
-export interface NotesState {
-    notes: INote[];
-  }
+import { NotesState, NotesStateStatus } from "./notes.state";
   
 export const initialState: NotesState = {
+    status: NotesStateStatus.INITIAL,
     notes: []
 };
   
