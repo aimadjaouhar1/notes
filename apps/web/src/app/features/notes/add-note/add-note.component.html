@@ -2,6 +2,7 @@
     <div class="mb-3">
       <label for="title" class="form-label">{{ 'LABELS.TITLE' | translate }} *</label>
       <input id="title" type="text" class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': isSubmitted && controls['title'].errors }" autofocus="" required>
+      <div id="title-error" class="form-text fs-small">{{ 'ERRORS.TITLE_REQUIRED' | translate }}</div>
     </div>
 
     <div class="mb-3">
