@@ -12,7 +12,7 @@ export class NoteHttp {
 
     private readonly http = inject(HttpClient);
 
-    addNote = (note: Omit<INote, 'id' | 'status'>): Observable<INote> => this.http.post<INote>(`${this.url}`, note);
+    addNote = (note: Omit<INote, 'id' | 'status'>): Observable<INote> => this.http.post<INote>(`${this.url}`, { note });
     getNotes = (): Observable<INote[]> => this.http.get<INote[]>(`${this.url}`);
 
 }
