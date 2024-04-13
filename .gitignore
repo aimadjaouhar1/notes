@@ -40,3 +40,9 @@ Thumbs.db
 
 .nx/cache
 .angular
+
+# env file
+.env
+
+# folders
+db
