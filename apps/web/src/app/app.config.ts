@@ -14,11 +14,12 @@ import {
 } from './_core/config/translation.config';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { notesReducer, NoteEffects } from './store/notes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(),
-    provideStore(),
+    provideEffects(NoteEffects),
+    provideStore({ notes: notesReducer }),
     provideRouter(appRoutes),
     provideHttpClient(withFetch()),
     importProvidersFrom(TranslateModule.forRoot(provideTranslation())),
