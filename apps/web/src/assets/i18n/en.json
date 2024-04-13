@@ -1,5 +1,11 @@
 {
     "BUTTONS": {
-        "SEARCH": "Search"
+        "SEARCH": "Search",
+        "ADD": "Add"
+    },
+    "LABELS": {
+        "TITLE": "Title",
+        "TAGS": "Tags",
+        "DESCRIPTION": "Description"
     }
 }

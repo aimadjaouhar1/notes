@@ -1,1 +1,20 @@
-<p>add-note works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">{{ 'LABELS.TITLE' | translate }} *</label>
+      <input id="title" type="text" class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': isSubmitted && controls['title'].errors }" autofocus="" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="tags" class="form-label">{{ 'LABELS.TAGS' | translate }}</label>
+      <select class="form-select" aria-label="Default select example" size="3" formControlName="tags" multiple>
+        <option *ngFor="let tag of tags">{{ tag }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">{{ 'LABELS.DESCRIPTION' | translate }}</label>
+      <textarea id="description" rows="5" class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ 'BUTTONS.ADD' | translate }}</button>
+  </form>
