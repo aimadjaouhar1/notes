@@ -1,6 +1,7 @@
 import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
+import * as path from 'path';
 import { CustomHttpExceptionResponse } from './custom-http-exception-response.interface';
 import { HttpExceptionResponse } from './http-exception.interface';
 
@@ -53,8 +54,18 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         return errorLog;
       };
     
-      private writeErrorLog(log: string) {
-        fs.appendFile(process.env.ERROR_LOG, log, {encoding: 'utf8', flag: 'a+'}, (err) => {
+      private async writeErrorLog(log: string) {
+        const logDirectory = path.dirname(process.env.ERROR_LOG);
+
+        if (!fs.existsSync(logDirectory)) {
+            fs.mkdirSync(logDirectory, { recursive: true });
+          }
+
+        if (!fs.existsSync(process.env.ERROR_LOG)) {
+            fs.writeFileSync(process.env.ERROR_LOG, '', 'utf8');
+        }
+
+        fs.appendFile(process.env.ERROR_LOG, log, 'utf8', (err) => {
           if (err) throw err;
         });
       };
