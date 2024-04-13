@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { INote } from '@notes/shared-lib/interfaces/note.interface';
 
 @Component({
   selector: 'app-list-notes',
@@ -8,4 +9,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './list-notes.component.html',
   styleUrl: './list-notes.component.scss',
 })
-export class ListNotesComponent {}
+export class ListNotesComponent {
+  @Input({required: true}) notes!: INote[]
+}
