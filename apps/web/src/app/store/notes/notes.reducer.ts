@@ -1,5 +1,4 @@
 import { createReducer, on } from "@ngrx/store";
-import { INote } from "@notes/shared-lib/interfaces/note.interface";
 import * as NotesActions from './notes.actions';
 import { NoteStatus } from "@notes/shared-lib/enums";
 import { NotesState, NotesStateStatus } from "./notes.state";
@@ -13,6 +12,26 @@ export const initialState: NotesState = {
 export const notesReducer = createReducer(
     initialState,
 
+    // Get Notes
+    on(NotesActions.getNotes, (state, { }) => ({
+      ...state,
+      status: NotesStateStatus.LOADING,
+    })),
+
+    on(NotesActions.getNotesSuccess, (state, { notes }) => ({
+      ...state,
+      notes: [...notes],
+      errorMessage: null,
+      status: NotesStateStatus.SUCCESS,
+    })),
+
+    on(NotesActions.getNoteFailure, (state, { errorMessage }) => ({
+      ...state,
+      errorMessage: errorMessage,
+      status: NotesStateStatus.ERROR,
+    })),
+    
+    // Add Notes
     on(NotesActions.addNote, (state, { note }) => ({
       ...state,
       notes: [...state.notes, {...note, id: -1, status: NoteStatus.CREATED}]
@@ -32,21 +51,9 @@ export const notesReducer = createReducer(
         };
     }),
 
-    on(NotesActions.getNotes, (state, { }) => ({
+    // Delete Notes
+    on(NotesActions.deleteNote, (state, { note }) => ({
       ...state,
-      status: NotesStateStatus.LOADING,
-    })),
-
-    on(NotesActions.getNotesSuccess, (state, { notes }) => ({
-      ...state,
-      notes: [...notes],
-      errorMessage: null,
-      status: NotesStateStatus.SUCCESS,
-    })),
-
-    on(NotesActions.getNoteFailure, (state, { errorMessage }) => ({
-      ...state,
-      errorMessage: errorMessage,
-      status: NotesStateStatus.ERROR,
+      notes: state.notes.filter(existingNote => existingNote.id !== note.id)
     })),
 );

@@ -26,6 +26,18 @@ export class NoteEffects {
     )
   );
 
+  deleteNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NotesActions.deleteNote),
+      switchMap(({ note }) =>
+        this.noteHttp.deleteNote(note).pipe(
+          map(() => NotesActions.deleteNoteSuccess()),
+          catchError(() => of(NotesActions.deleteNoteFailure()))
+        )
+      )
+    )
+  );
+
   getNotes$ = createEffect(() => 
     this.actions$.pipe(
       ofType(NotesActions.getNotes),
@@ -39,6 +51,14 @@ export class NoteEffects {
   closeAddNoteModal$ = createEffect(() => 
     this.actions$.pipe(
       ofType(NotesActions.addNoteSuccess),
+      tap(() => this.modalService.dismissAll())
+    ),
+    {dispatch: false}
+  );
+
+  closeDeleteNoteModal$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(NotesActions.deleteNoteSuccess),
       tap(() => this.modalService.dismissAll())
     ),
     {dispatch: false}
