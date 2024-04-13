@@ -1,7 +1,9 @@
 {
     "BUTTONS": {
         "SEARCH": "Search",
-        "ADD": "Add"
+        "ADD": "Add",
+        "CANCEL": "Cancel",
+        "CONFIRM": "Confirm"
     },
     "LABELS": {
         "TITLE": "Title",
@@ -10,6 +12,8 @@
         "NOTES": "Notes"
     },
     "MODALS": {
-        "ADD_NOTE_MODAL_TITLE": "Add Note"
+        "ADD_NOTE_MODAL_TITLE": "Add Note",
+        "DELETE_NOTE_MODAL_TITLE": "Delete Note",
+        "DELETE_NOTE_MODAL_P1": "Are you sure you want to delete" 
     }
 }
