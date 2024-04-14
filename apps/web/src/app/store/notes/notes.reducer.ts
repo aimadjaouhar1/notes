@@ -56,4 +56,21 @@ export const notesReducer = createReducer(
       ...state,
       notes: state.notes.filter(existingNote => existingNote.id !== note.id)
     })),
+
+    // Search Notes
+    on(NotesActions.searchNote, (state, { searchQuery }) => ({
+      ...state,
+      status: NotesStateStatus.LOADING
+    })),
+
+    on(NotesActions.searchNoteSuccess, (state, {}) => ({
+      ...state,
+      status: NotesStateStatus.SUCCESS
+    })),
+
+    on(NotesActions.searchNoteFailure, (state, { errorMessage }) => ({
+      ...state,
+      errorMessage: errorMessage,
+      status: NotesStateStatus.ERROR,
+    })),
 );

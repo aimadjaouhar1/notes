@@ -12,3 +12,7 @@ export const getNotesFailure = createAction('[Note] Get Notes Failure', props<{ 
 export const deleteNote = createAction('[Note] Delete Note', props<{ note: INote }>());
 export const deleteNoteSuccess = createAction('[Note] Delete Note Success');
 export const deleteNoteFailure = createAction('[Note] Delete Note Failure');
+
+export const searchNote = createAction('[Note] Search Note', props<{ searchQuery: string }>());
+export const searchNoteSuccess = createAction('[Note] Search Note Success');
+export const searchNoteFailure = createAction('[Note] Search Note Failure', props<{ errorMessage: string }>());
