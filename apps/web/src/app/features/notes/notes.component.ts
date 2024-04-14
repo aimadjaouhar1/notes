@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { NotesState, selectGetNotes, statusSelector, NotesStateStatus, errorMessageSelector } from '@notes/web/app/store/notes';
 import * as NotesActions from '@notes/web/app/store/notes/notes.actions';
 import { DeleteNoteComponent } from './delete-note/delete-note.component';
+import { EmptyPlaceholderComponent } from '../../_shared/components/empty-placeholder/empty-placeholder.component';
 
 
 @Component({
@@ -22,7 +23,8 @@ import { DeleteNoteComponent } from './delete-note/delete-note.component';
     SearchNotesComponent, 
     AddNoteComponent, 
     ListNotesComponent,
-    DeleteNoteComponent
+    DeleteNoteComponent,
+    EmptyPlaceholderComponent
   ],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
@@ -41,8 +43,10 @@ export class NotesComponent {
   NotesStateStatus = NotesStateStatus;
 
   constructor() {
-    this.store.dispatch(NotesActions.getNotes());
+    this.getNotes();
   }
+
+  getNotes = () => this.store.dispatch(NotesActions.getNotes());
 
   onClickAdd(template: TemplateRef<ElementRef>) {
     this.modalService.open(template, { centered: true });
@@ -55,6 +59,6 @@ export class NotesComponent {
 
   handleAddNote = (note: Omit<INote, "id" | "status">) => this.store.dispatch(NotesActions.addNote({ note }));
 
-  handleDeleteNote = (note: INote) => this.store.dispatch(NotesActions.deleteNote({ note })) 
+  handleDeleteNote = (note: INote) => this.store.dispatch(NotesActions.deleteNote({ note }));
 
 }

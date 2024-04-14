@@ -3,7 +3,8 @@
         "SEARCH": "Search",
         "ADD": "Add",
         "CANCEL": "Cancel",
-        "CONFIRM": "Confirm"
+        "CONFIRM": "Confirm",
+        "RELOAD": "Reload"
     },
     "LABELS": {
         "TITLE": "Title",
@@ -19,5 +20,8 @@
     },
     "ERRORS": {
         "TITLE_REQUIRED": "title is required!"
-    }
+    },
+    "EMPTY_PLACEHOLDER_TITLE": "Nothing!",
+    "EMPTY_PLACEHOLDER_SUB_TITLE": "Oops! Seems like there's nothing here"
+
 }

@@ -8,7 +8,9 @@
 
     <ng-container [ngSwitch]="(status$ | async)">
         <div *ngSwitchCase="NotesStateStatus.SUCCESS">
-            <app-list-notes [notes]="(notes$ | async) ?? []" (delete)="openDeleteConfirmation(deleteNoteModal, $event)" />
+            <ng-container *ngIf="notes$ | async as notes">
+                <app-list-notes *ngIf="notes.length > 0; else emptyPlaceholder" [notes]="notes" (delete)="openDeleteConfirmation(deleteNoteModal, $event)" />
+            </ng-container>
         </div>
 
         <div *ngSwitchCase="NotesStateStatus.LOADING">
@@ -24,13 +26,17 @@
             <div class="alert alert-danger d-flex align-items-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill fs-3 me-2"></i>
                 <div>
-                    {{ errorMessage$ | async }}
+                    {{ errorMessage$ | async | json }}
                 </div>
             </div>
         </div>
     </ng-container> 
 </div>
 
+
+<ng-template #emptyPlaceholder>
+    <app-empty-placeholder (reload)="getNotes()" />
+</ng-template>
 
 <ng-template #addNoteModal let-modal>
     <div class="modal-header">
