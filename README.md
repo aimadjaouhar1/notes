@@ -7,7 +7,7 @@ Notes is a demo project that showcases my coding abilities and skills. This proj
 
 - **Nx Monorepo:** 
 
-The project is organized as an Nx monorepo, allowing for efficient code sharing and reusability across different applications and libraries.
+    The project is organized as an Nx monorepo, allowing for efficient code sharing and reusability across different applications and libraries.
 
 - **Angular Frontend:** 
 
