@@ -34,7 +34,7 @@ export const notesReducer = createReducer(
     // Add Notes
     on(NotesActions.addNote, (state, { note }) => ({
       ...state,
-      notes: [...state.notes, {...note, id: -1, status: NoteStatus.CREATED}]
+      notes: [{...note, id: -1, status: NoteStatus.CREATED, }, ...state.notes ]
     })),
 
     on(NotesActions.addNoteSuccess, (state, { note }) => {
