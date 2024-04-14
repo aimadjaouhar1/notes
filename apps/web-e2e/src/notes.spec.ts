@@ -1,22 +1,31 @@
 import { test, expect } from '@playwright/test';
 
-test('Add Note modal opened', async ({ page }) => {
-  await page.goto('/');
-  
-  const openAddModalBtn = page.getByText('+');
-  openAddModalBtn.click();
+test.describe.configure({ mode: 'serial' });
 
-  expect(await page.locator('h4').innerText()).toContain('Add Note');
+const notes = [
+  {id: null, title: 'Note 1', description: 'Lorem ipsum dolor sit amet, A consectetur adipiscing elit', tags: []},
+  {id: null, title: 'Note 2', description: 'Lorem ipsum dolor sit amet, B consectetur adipiscing elit', tags: []},
+  {id: null, title: 'Note 3', description: 'Lorem ipsum dolor sit amet, B consectetur adipiscing elit', tags: []},
+  {id: null, title: 'Note 4', description: 'Lorem ipsum dolor sit amet, A consectetur adipiscing elit', tags: []},
+];
+
+
+test.beforeAll('Setup Database', async ({request}) => {
+  for await (const note of notes) {
+    const response = await request.post(`/api/notes`, { data: { note } });
+    const createdNote = await response.json();
+    note.id = createdNote.id;
+  }
 });
 
 
-test('Form Failure Success Test: Verifying required fields', async ({ page }) => {
+test('Add Note Submission Failure Test: Verifying required fields', async ({ page }) => {
   await page.goto('/');
   
   const openAddModalBtn = page.getByText('+');
   openAddModalBtn.click();
 
-  await page.waitForTimeout(1000);
+  await page.waitForSelector('.modal-body', {state: 'visible'});
 
   const addBtn = await page.getByText('Add', {exact: true});
   await addBtn.click()
@@ -25,24 +34,49 @@ test('Form Failure Success Test: Verifying required fields', async ({ page }) =>
 });
 
 
-test('Form Submission Success Test: Verifying Note Addition', async ({ page }) => {
+test('Add Note Submission Success Test: Verifying Note Addition', async ({ page }) => {
   await page.goto('/');
   
   const openAddModalBtn = page.getByText('+');
   openAddModalBtn.click();
 
-  await page.waitForTimeout(1000);
+  await page.waitForSelector('.modal-body', {state: 'visible'});
 
-  const title = 'Test Note 1';
+  const title = 'Test Note';
 
   const titleInput = page.locator('#title');
   titleInput.fill(title);
 
   const addBtn = await page.getByText('Add', {exact: true});
-  await addBtn.click()
+  await addBtn.click();
 
-  for await (const cardTitle of await page.locator('.card-title').all()) {
-    expect(await cardTitle.innerHTML()).toContain(title);
+  expect(await page.getByText(title, {exact: true})).toBeDefined();
+});
+
+
+test('Delete Note Submission Success Test: Verifying Note Deletion', async ({ page }) => {
+  await page.goto('/');
+
+  const title = 'Test Note';
+  const indexOfLastAdded = 0;
+
+  const btnDelete = await (page.locator('.btn-delete')).nth(indexOfLastAdded);
+  await btnDelete.click()
+
+  await page.waitForSelector('.modal-body', {state: 'visible'});
+
+
+  const addBtn = await page.getByText('Confirm', {exact: true});
+  await addBtn.click();
+
+  await page.waitForSelector('.modal-body', {state: 'hidden'});
+
+  expect(await page.getByText(title, {exact: true})).toBeDefined();
+});
+
+
+test.afterAll('Clean Database', async ({request}) => {
+  for await (const note of notes) {
+    const response = await request.delete(`/api/notes/${note.id}`);
   }
-
 });
