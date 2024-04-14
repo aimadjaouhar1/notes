@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  web:
+    image: aimadjaouhar/notes:web-${version}
+    container_name: notes-web
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/certs
+    networks:
+      - notes-network
+  
+  api:
+    image: aimadjaouhar/notes:api-${version}
+    container_name: notes-api
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    networks:
+      - notes-network
+
+  db:
+    image: postgres:11.5
+    container_name: notes-db
+    hostname: notes-db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+    networks:
+      - notes-network
+    volumes:
+      - ./db:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  notes-network:
+    driver: bridge
