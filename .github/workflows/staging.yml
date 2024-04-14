@@ -26,8 +26,8 @@ jobs:
       - name: Lint Project web
         run: pnpm nx lint web
 
-      # - name: Lint Project api
-      #   run: pnpm nx lint api
+      - name: Lint Project api
+        run: pnpm nx lint api
 
 
       - name: Generate .env file
