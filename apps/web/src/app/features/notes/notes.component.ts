@@ -61,4 +61,6 @@ export class NotesComponent {
 
   handleDeleteNote = (note: INote) => this.store.dispatch(NotesActions.deleteNote({ note }));
 
+  handleSearchNote = (searchQuery: string) => this.store.dispatch(NotesActions.searchNote({ searchQuery }));
+
 }
