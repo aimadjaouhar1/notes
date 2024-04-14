@@ -99,5 +99,3 @@ jobs:
           file: ./docker/api.Dockerfile
           push: true
           tags: aimadjaouhar/notes:api-${{ env.VERSION }}
-
-
