@@ -10,6 +10,11 @@ variable DOCKER_HUB_USERNAME {}
 variable DOCKER_HUB_PASSWORD {}
 variable CI_ENV { default = false }
 
+provider "aws" {
+  region  = var.AWS_REGION
+  access_key = var.AWS_ACCESS_KEY_ID
+  secret_key = var.AWS_SECRET_ACCESS_KEY
+}
 
 terraform {
   
@@ -20,20 +25,19 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket = "notes-tfstate"
-    key = "state/terraform.tfstate"
-    region = "us-west-2"
-    encrypt = true
-    dynamodb_table = "notes_tf_lockid"
-  }
+  # backend "s3" {
+  #   bucket = "notes-1-tfstate"
+  #   key = "state/terraform.tfstate"
+  #   region = "us-east-1"
+  #   encrypt = true
+  #   dynamodb_table = "notes-1_tf_lockid"
+  #   shared_credentials_file = "../.aws/credentials"
+  #   profile = "notes"
+  #   skip_credentials_validation = true
+  # }
 }
 
-provider "aws" {
-  region  = var.AWS_REGION
-  access_key = var.AWS_ACCESS_KEY_ID
-  secret_key = var.AWS_SECRET_ACCESS_KEY
-}
+
 
 resource "tls_private_key" "rsa4096" {
   algorithm = "RSA"
@@ -68,6 +72,13 @@ resource "aws_security_group" "notes_ec2_group" {
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -139,7 +150,7 @@ resource "null_resource" "run_ansible" {
   depends_on = [local_file.inventory]
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${var.WORK_DIR}/ansible/playbooks/inventory.ini ${var.WORK_DIR}/ansible/playbooks/deploy.yml --extra-vars 'docker_hub_username=${var.DOCKER_HUB_USERNAME} docker_hub_password=${var.DOCKER_HUB_PASSWORD}' "
+    command = "ansible-playbook -i ${var.WORK_DIR}/ansible/playbooks/inventory.ini ${var.WORK_DIR}/ansible/playbooks/deploy.yml --ssh-common-args='-o StrictHostKeyChecking=no -o ConnectTimeout=15 -o ConnectionAttempts=4' --extra-vars 'docker_hub_username=${var.DOCKER_HUB_USERNAME} docker_hub_password=${var.DOCKER_HUB_PASSWORD}' "
     working_dir = path.module
   }
 }
