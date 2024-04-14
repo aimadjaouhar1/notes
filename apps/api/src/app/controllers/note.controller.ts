@@ -1,15 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 
 import { NoteService } from '../services/note.service';
 import { NoteDto } from '../dto/note.dto';
+import { NoteSearchQueryDto } from '../dto/note-search-query.dto';
 
 @Controller('/notes')
 export class NoteController {
   constructor(private readonly noteService: NoteService) {}
 
   @Get()
-  getNotes() {
-    return this.noteService.getNotes();
+  getNotes(@Query() noteSearchDto: NoteSearchQueryDto) {
+    return this.noteService.getNotes(noteSearchDto.search);
   }
 
   @Post()
