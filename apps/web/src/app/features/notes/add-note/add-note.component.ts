@@ -36,7 +36,9 @@ export class AddNoteComponent {
     if(this.form.valid) {
       const {title, tags, description} = this.form.getRawValue();
 
-      this.add.emit({title: title!, tags: tags ?? [], description: description ?? ''})
+      if(title) {
+        this.add.emit({title: title, tags: tags ?? [], description: description || ''});
+      }
     }
   }
 

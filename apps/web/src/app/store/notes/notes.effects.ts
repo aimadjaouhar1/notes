@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, TemplateRef, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import * as NotesActions from './notes.actions';

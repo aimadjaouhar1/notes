@@ -13,7 +13,7 @@ export const notesReducer = createReducer(
     initialState,
 
     // Get Notes
-    on(NotesActions.getNotes, (state, { }) => ({
+    on(NotesActions.getNotes, (state) => ({
       ...state,
       status: NotesStateStatus.LOADING,
     })),
@@ -44,7 +44,7 @@ export const notesReducer = createReducer(
         };
     }),
 
-    on(NotesActions.addNoteFailure, (state, {}) => {
+    on(NotesActions.addNoteFailure, (state) => {
         return {
           ...state,
           notes: state.notes.filter(existingNote => existingNote.id !== -1)
@@ -58,7 +58,7 @@ export const notesReducer = createReducer(
     })),
 
     // Search Notes
-    on(NotesActions.searchNote, (state, { searchQuery }) => ({
+    on(NotesActions.searchNote, (state) => ({
       ...state,
       status: NotesStateStatus.LOADING
     })),

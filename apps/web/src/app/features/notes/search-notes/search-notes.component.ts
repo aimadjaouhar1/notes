@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class SearchNotesComponent {
   @Output() search = new EventEmitter<string>();
 
-  searchQuery: string = '';
+  searchQuery = '';
 
   onSubmit = () => this.search.emit(this.searchQuery);
 
