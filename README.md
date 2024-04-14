@@ -11,44 +11,46 @@ Notes is a demo project that showcases my coding abilities and skills. This proj
 
 - **Angular Frontend:** 
 
-The frontend is built with Angular, providing a responsive and user-friendly interface. It demonstrates my proficiency in creating modern and dynamic web applications.
+    The frontend is built with Angular, providing a responsive and user-friendly interface. It demonstrates my proficiency in creating modern and dynamic web applications.
 
 - **NgRx State Management:** 
 
-NgRx is utilized for state management in the Angular frontend, ensuring a predictable and efficient data flow within the application.
+    NgRx is utilized for state management in the Angular frontend, ensuring a predictable and efficient data flow within the application.
 
 - **Playwright for End-to-End Testing:** 
 
-Playwright is employed for end-to-end testing of the application, allowing for automated testing of user interactions across various browsers.
+    Playwright is employed for end-to-end testing of the application, allowing for automated testing of user interactions across various browsers.
 
 - **Nest JS Backend:** 
 
-The backend is powered by Nest JS, a scalable and extensible Node.js framework. It follows RESTful API principles and is designed for maintainability and scalability.
+    The backend is powered by Nest JS, a scalable and extensible Node.js framework. It follows RESTful API principles and is designed for maintainability and scalability.
 
 - **Docker Containers:** 
 
-The project is containerized using Docker, facilitating seamless deployment across different environments and ensuring consistency.
+    The project is containerized using Docker, facilitating seamless deployment across different environments and ensuring consistency.
 
 - **Infrastructure as Code (IaC):** 
 
-Infrastructure is managed as code using Terraform, enabling the provisioning and scaling of resources with ease.
+    Infrastructure is managed as code using Terraform, enabling the provisioning and scaling of resources with ease.
 
 - **Automation with Ansible:** 
 
-Ansible is employed for configuration management and automation, streamlining the deployment process and ensuring consistency across environments.
+    Ansible is employed for configuration management and automation, streamlining the deployment process and ensuring consistency across environments.
 
 - **CI/CD with GitHub Actions:** 
 
-The project follows CI/CD best practices using GitHub Actions, automating the testing, building, and deployment processes with each push to the repository.
+    The project follows CI/CD best practices using GitHub Actions, automating the testing, building, and deployment processes with each push to the repository.
+
+
 
 
 ## Getting Started
 
-To get started with PDF Master, follow these steps:
+To get started with Notes, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/pdf-master.git
+    git clone https://github.com/aimadjaouhar1/notes.git
     
     cd notes
 
