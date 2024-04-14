@@ -52,7 +52,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         ${JSON.stringify(errorResponse)}\n\n
         ${exception instanceof HttpException ? exception.stack : error}\n\n`;
         return errorLog;
-      };
+    }
     
       private async writeErrorLog(log: string) {
         const logDirectory = path.dirname(process.env.ERROR_LOG);
@@ -68,7 +68,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         fs.appendFile(process.env.ERROR_LOG, log, 'utf8', (err) => {
           if (err) throw err;
         });
-      };
+    }
 
 
 }

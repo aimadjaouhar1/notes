@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { NoteStatus } from '@notes/shared-lib/enums';
 import { INote } from '@notes/shared-lib/interfaces'
 import { NoteDto } from '../dto/note.dto';
 import { InjectRepository } from '@nestjs/typeorm';
