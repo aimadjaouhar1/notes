@@ -43,11 +43,13 @@ Thumbs.db
 
 # env file
 .env
+.env.prod
 
 # folders
 db
 logs
 .aws
+certs
 
 # terraform Files
 terraform/**
