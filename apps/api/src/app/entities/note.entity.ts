@@ -1,6 +1,6 @@
 import { NoteStatus } from "@notes/shared-lib/enums";
 import { INote } from "@notes/shared-lib/interfaces";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Note implements INote {
@@ -20,4 +20,6 @@ export class Note implements INote {
     @Column({type: 'enum', enum: NoteStatus, default: NoteStatus.CREATED})
     status: NoteStatus;
 
+    @CreateDateColumn({ type: "timestamp" })
+    createdAt: Date;
 }
