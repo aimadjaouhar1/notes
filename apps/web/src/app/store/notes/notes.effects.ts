@@ -43,7 +43,7 @@ export class NoteEffects {
       ofType(NotesActions.getNotes),
       switchMap(() => this.noteHttp.getNotes().pipe(
         map((notes) => NotesActions.getNotesSuccess({ notes })),
-        catchError((error) => of(NotesActions.getNotesFailure({ errorMessage: error })))
+        catchError((err) => of(NotesActions.getNotesFailure({ errorMessage: err.error || 'Internal server error!' })))
       )) 
     )
   );
