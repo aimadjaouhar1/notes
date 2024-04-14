@@ -63,8 +63,9 @@ export const notesReducer = createReducer(
       status: NotesStateStatus.LOADING
     })),
 
-    on(NotesActions.searchNoteSuccess, (state, {}) => ({
+    on(NotesActions.searchNoteSuccess, (state, { notes }) => ({
       ...state,
+      notes: [...notes],
       status: NotesStateStatus.SUCCESS
     })),
 

@@ -13,6 +13,7 @@ export class NoteEffects {
   private readonly modalService = inject(NgbModal);
   private readonly noteHttp =  inject(NoteHttp);
 
+  private readonly defaultError = 'Internal server error!';
 
   addNote$ = createEffect(() =>
     this.actions$.pipe(
@@ -43,7 +44,17 @@ export class NoteEffects {
       ofType(NotesActions.getNotes),
       switchMap(() => this.noteHttp.getNotes().pipe(
         map((notes) => NotesActions.getNotesSuccess({ notes })),
-        catchError((err) => of(NotesActions.getNotesFailure({ errorMessage: err.error || 'Internal server error!' })))
+        catchError((err) => of(NotesActions.getNotesFailure({ errorMessage: err.error || this.defaultError })))
+      )) 
+    )
+  );
+
+  searchNotes$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(NotesActions.searchNote),
+      switchMap(({ searchQuery }) => this.noteHttp.getNotes(searchQuery).pipe(
+        map((notes) => NotesActions.searchNoteSuccess({ notes })),
+        catchError((err) => of(NotesActions.searchNoteFailure({ errorMessage: err.error || this.defaultError })))
       )) 
     )
   );
