@@ -31,8 +31,13 @@
 
     - name: Copy .env file
       copy:
-        src: ../../.env
-        dest: notes/
+        src: ../../.env.prod
+        dest: notes/.env
+    
+    - name: Copy certs folder
+      copy:
+        src: ../../certs/
+        dest: notes/certs/
 
     - name: Install Docker SDK for Python
       ansible.builtin.pip:
