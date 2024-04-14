@@ -18,7 +18,10 @@ export class NoteService {
       where: [
         { title: Like(`%${searchQuery}%`) },
         { description: Like(`%${searchQuery}%`) }
-      ]
+      ],
+      order: {
+        createdAt: 'DESC'
+      }
     });
   }
 
